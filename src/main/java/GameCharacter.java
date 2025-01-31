@@ -1,17 +1,49 @@
+import java.io.Serializable;
 import java.util.Random;
+import java.util.ArrayList;
 
-public abstract class GameCharacter {
+public abstract class GameCharacter implements Serializable {
     private String name;
-
-
     private int hitPoints;
     double dexterity;
     private Weapon equippedWeapon;
+    private ArrayList<Weapon> inventory;
+
 
     // Konstruktor
     public GameCharacter(String name, int hitPoints) {
         this.name = name;
         this.hitPoints = hitPoints;
+        this.inventory = new ArrayList<>();
+    }
+
+
+    // Getter och setter för inventory
+    public ArrayList<Weapon> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(ArrayList<Weapon> inventory) {
+        this.inventory = inventory;
+    }
+
+    // add weapon to inventory
+    public void addWeaponToInventory(Weapon weapon) {
+        inventory.add(weapon);
+    }
+
+    // remove weapon from inventory
+    public void removeWeaponFromInventory(int index) {
+        if (index >= 0 && index < inventory.size()) {
+            inventory.remove(index);
+        }
+    }
+
+    // choose weapon from inventory
+    public void chooseWeapon(int index) {
+        if (index >= 0 && index < inventory.size()) {
+            setEquippedWeapon(inventory.get(index));
+        }
     }
 
 
@@ -44,6 +76,7 @@ public abstract class GameCharacter {
     public int getHitPoints() {
         return hitPoints;
     }
+
     public void setHitPoints(int hitPoints) {
         this.hitPoints = Math.max(hitPoints, 0);
     }

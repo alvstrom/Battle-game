@@ -1,5 +1,7 @@
 // src/test/java/NpcTest.java
+
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class NpcTest {
@@ -25,5 +27,16 @@ class NpcTest {
 
         assertTrue(player.getHitPoints() < initialPlayerHitPoints);
         assertEquals(initialNpcHitPoints, npc.getHitPoints());
+    }
+
+    @Test
+    void spawnNpc() {
+        GameCharacter npc = Npc.spawnNpc();
+        assertNotNull(npc);
+        assertTrue(npc instanceof Npc);
+        assertNotNull(npc.getName());
+        assertTrue(npc.getHitPoints() >= 50 && npc.getHitPoints() <= 100);
+        assertNotNull(npc.getEquippedWeapon());
+        assertTrue(npc.getEquippedWeapon().getDamage() >= 7 && npc.getEquippedWeapon().getDamage() <= 15);
     }
 }
